@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: '600',
     color: colors.textPrimary,
   },
   row: {

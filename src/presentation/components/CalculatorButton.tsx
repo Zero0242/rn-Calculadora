@@ -37,7 +37,7 @@ export function CalculatorButton({
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           ...styles.buttonText,
-          color: buttonType === 'action' ? 'black' : 'white',
+          color: buttonType === 'special-action' ? 'black' : 'white',
         }}>
         {label}
       </Text>
