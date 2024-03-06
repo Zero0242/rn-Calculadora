@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
+import {CalculatorScreen} from './presentation/screens';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>App</Text>
+      <CalculatorScreen />
     </View>
   );
 };
