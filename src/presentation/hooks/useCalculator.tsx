@@ -1,7 +1,16 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
+
+export enum Operator {
+  add,
+  substract,
+  multiply,
+  divide,
+}
 
 export const useCalculator = () => {
   const [counter, setCounter] = useState('0');
+  const [previousCounter, setPreviousCounter] = useState('0');
+  const lastOperation = useRef<Operator>(Operator.add);
 
   const buildNumber = (numberText: string) => {
     if (counter.includes('.') && numberText === '.') {
@@ -47,15 +56,40 @@ export const useCalculator = () => {
     setCounter(value.toString());
   };
 
-  const reset = () => setCounter('0');
+  const reset = () => {
+    setCounter('0');
+    setPreviousCounter('0');
+  };
+
+  const setLastNumber = () => {
+    if (counter.endsWith('.')) {
+      setPreviousCounter(counter.slice(0, -1));
+    } else {
+      setPreviousCounter(counter);
+    }
+    setCounter('0');
+  };
+
+  const setOperation = (operator: Operator) => {
+    setLastNumber();
+    lastOperation.current = operator;
+  };
+
+  const setResult = () => {
+    let counterNumber: number = parseFloat(counter);
+    let prevCounterNumber: number = parseFloat(previousCounter);
+  };
 
   return {
     // * props
     counter,
+    previousCounter,
     // * methods
     buildNumber,
     reset,
     deleteOperation,
     toggleSign,
+    setOperation,
+    setResult,
   };
 };
