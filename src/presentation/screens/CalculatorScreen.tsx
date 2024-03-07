@@ -5,7 +5,8 @@ import {CalculatorButton} from '../components';
 import {useCalculator} from '../hooks/useCalculator';
 
 export const CalculatorScreen = () => {
-  const {counter, buildNumber, reset} = useCalculator();
+  const {counter, buildNumber, reset, toggleSign, deleteOperation} =
+    useCalculator();
 
   return (
     <View style={styles.calculatorContainer}>
@@ -23,8 +24,16 @@ export const CalculatorScreen = () => {
             label="C"
             buttonType="special-action"
           />
-          <CalculatorButton label="+/-" buttonType="special-action" />
-          <CalculatorButton label="del" buttonType="special-action" />
+          <CalculatorButton
+            onPress={toggleSign}
+            label="+/-"
+            buttonType="special-action"
+          />
+          <CalculatorButton
+            onPress={deleteOperation}
+            label="del"
+            buttonType="special-action"
+          />
           <CalculatorButton label="/" buttonType="action" />
         </View>
         <View style={globalStyle.row}>

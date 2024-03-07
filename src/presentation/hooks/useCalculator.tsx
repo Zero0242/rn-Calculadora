@@ -30,6 +30,24 @@ export const useCalculator = () => {
     setCounter(counter + numberText);
   };
 
+  const deleteOperation = () => {
+    if (counter.length < 2) {
+      return setCounter('0');
+    }
+    const textList = counter.split('');
+    const result = counter.substring(0, textList.length - 1);
+    if (result === '-') {
+      return setCounter('0');
+    }
+    setCounter(result);
+  };
+
+  const toggleSign = () => {
+    let value: number = parseFloat(counter);
+    value = value * -1;
+    setCounter(value.toString());
+  };
+
   const reset = () => setCounter('0');
 
   return {
@@ -38,5 +56,7 @@ export const useCalculator = () => {
     // * methods
     buildNumber,
     reset,
+    deleteOperation,
+    toggleSign,
   };
 };
