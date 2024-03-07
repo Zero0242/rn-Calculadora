@@ -31,14 +31,13 @@ export const useCalculator = () => {
   };
 
   const deleteOperation = () => {
-    if (counter.length < 2) {
+    const numberRef: number = Math.abs(parseFloat(counter));
+    if (numberRef < 10) {
       return setCounter('0');
     }
-    const textList = counter.split('');
-    const result = counter.substring(0, textList.length - 1);
-    if (result === '-') {
-      return setCounter('0');
-    }
+
+    const result = counter.slice(0, -1);
+
     setCounter(result);
   };
 
