@@ -1,16 +1,25 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 export enum Operator {
-  add,
-  substract,
-  multiply,
-  divide,
+  add = '+',
+  substract = '-',
+  multiply = '*',
+  divide = '/',
 }
 
 export const useCalculator = () => {
+  const [formula, setFormula] = useState('');
   const [counter, setCounter] = useState('0');
   const [previousCounter, setPreviousCounter] = useState('0');
   const lastOperation = useRef<Operator>(Operator.add);
+
+  useEffect(() => {
+    if (lastOperation.current) {
+      const firstPart = formula.split(' ').at(0);
+      setFormula(`${firstPart} ${lastOperation.current} ${counter}`);
+    }
+    setFormula(counter);
+  }, [counter]);
 
   const buildNumber = (numberText: string) => {
     if (counter.includes('.') && numberText === '.') {
@@ -77,6 +86,7 @@ export const useCalculator = () => {
 
   const setResult = () => {
     let result: number = _calculateValue();
+    setFormula(result.toString());
     setCounter(`${result}`);
     setPreviousCounter('0');
   };
@@ -105,6 +115,7 @@ export const useCalculator = () => {
     // * props
     counter,
     previousCounter,
+    formula,
     // * methods
     buildNumber,
     reset,
