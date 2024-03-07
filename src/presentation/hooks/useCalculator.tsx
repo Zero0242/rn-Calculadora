@@ -76,8 +76,29 @@ export const useCalculator = () => {
   };
 
   const setResult = () => {
-    let counterNumber: number = parseFloat(counter);
-    let prevCounterNumber: number = parseFloat(previousCounter);
+    let result: number = _calculateValue();
+    setCounter(`${result}`);
+    setPreviousCounter('0');
+  };
+
+  const _calculateValue = (): number => {
+    let num1: number = Number(counter);
+    let num2: number = Number(previousCounter);
+    switch (lastOperation.current) {
+      case Operator.add:
+        return num1 + num2;
+      case Operator.divide:
+        if (num1 === 0) {
+          return 0;
+        }
+        return num2 / num1;
+      case Operator.multiply:
+        return num1 * num2;
+      case Operator.substract:
+        return num2 - num1;
+      default:
+        throw new Error('Estas cometiendo pecados contra la naturaleza');
+    }
   };
 
   return {

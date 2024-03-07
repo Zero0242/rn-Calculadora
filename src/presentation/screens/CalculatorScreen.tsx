@@ -13,6 +13,7 @@ export const CalculatorScreen = () => {
     deleteOperation,
     previousCounter,
     setOperation,
+    setResult,
   } = useCalculator();
 
   return (
@@ -90,7 +91,7 @@ export const CalculatorScreen = () => {
             buttonType="big-number"
           />
           <CalculatorButton onPress={() => buildNumber('.')} label="." />
-          <CalculatorButton label="=" buttonType="action" />
+          <CalculatorButton onPress={setResult} label="=" buttonType="action" />
         </View>
       </View>
     </View>
