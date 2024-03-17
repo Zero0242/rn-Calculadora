@@ -1,4 +1,4 @@
-package com.calculadorav2
+package com.pedrocorrea.rncalculadora
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

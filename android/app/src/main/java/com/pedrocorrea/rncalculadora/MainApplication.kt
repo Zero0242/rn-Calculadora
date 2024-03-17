@@ -1,4 +1,4 @@
-package com.calculadorav2
+package com.pedrocorrea.rncalculadora
 
 import android.app.Application
 import com.facebook.react.PackageList
