@@ -1,3 +1,9 @@
+# Curso
+
+Aplicaciones de React Native CLI [Udemy](https://www.udemy.com/course/react-native-fh)
+
+Playlist , Calculadora con EXPO [Youtube](https://youtube.com/playlist?list=PLCKuOXG0bPi3aqkcoth4ItLJzWCQ2POin&si=jORMhA2ruvBtqoeV)
+
 # Generar llaves de android
 
 ```bash
