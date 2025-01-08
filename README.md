@@ -47,6 +47,8 @@ Otros scripts que pueden usar para fines de desarrollo, (acciones de paquetes)
 Links de librerias utilizadas
 
 - [React Native]("https://reactnative.dev/")
+- [Curso de Udemy](https://www.udemy.com/course/react-native-fh)
+- [Curso de Youtube](https://youtube.com/playlist?list=PLCKuOXG0bPi3aqkcoth4ItLJzWCQ2POin&si=jORMhA2ruvBtqoeV)
 
 ## PROD
 
