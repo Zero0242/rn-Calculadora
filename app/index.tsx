@@ -1,16 +1,17 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
-import { Colors } from '@/constants/Colors'
+import { ThemedText } from '@/components'
+import { globalStyles } from '../constants/global-styles';
 
 export default function CalculadoraApp() {
     return (
-        <View>
-            <Text style={{ fontSize: 40, fontFamily: 'SpaceMono', color: Colors.textPrimary }}>
-                Calculadora App
-            </Text>
-            <Text style={{ fontSize: 25, fontFamily: 'SpaceMono', color: Colors.textSecondary }}>
-                2666
-            </Text>
+        <View style={globalStyles.calculatorContainer}>
+            <ThemedText variant='h1'>
+                10 x 100000
+            </ThemedText>
+            <ThemedText variant='h2'>
+                1000000
+            </ThemedText>
         </View>
     )
 }
