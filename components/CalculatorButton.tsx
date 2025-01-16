@@ -2,6 +2,7 @@ import { Colors } from '@/constants/Colors';
 import { globalStyles } from '@/constants/global-styles';
 import React, { useMemo } from 'react';
 import { Pressable, Text } from 'react-native';
+import * as Haptics from 'expo-haptics'
 
 interface Props {
     label: string;
@@ -27,7 +28,10 @@ export function CalculatorButton({
 
     return (
         <Pressable
-            onPress={onPress}
+            onPress={() => {
+                onPress && onPress()
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+            }}
             style={({ pressed }) => ({
                 ...globalStyles.button,
                 backgroundColor: currentColor,

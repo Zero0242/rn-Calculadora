@@ -2,6 +2,6 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.ts": "always",
-        "source.removeUnused.ts": "always"
+        // "source.removeUnused.ts": "always"
     }
 }
