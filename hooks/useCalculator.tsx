@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-enum Operation {
+export enum Operation {
     addition = '+',
     substraction = '-',
     multiplication = 'x',
@@ -16,8 +16,8 @@ export const useCalculator = () => {
     function buildNumber(text: string) {
         // * No agregar más puntos ni 0s innecesarios
         if (text === '.' && counter.includes('.')) return
-        if (counter === '0') {
-            if (text === '.') setCounter('0.')
+        if (['0', '-0'].includes(counter)) {
+            if (text === '.') setCounter(cur => cur + text)
             else setCounter(text)
             return
         }
@@ -29,6 +29,27 @@ export const useCalculator = () => {
         setPreviousCounter('0')
     }
 
+    function removeChar() {
+        const num = Math.abs(parseFloat(counter))
+        if (num < 10) {
+            return setCounter('0')
+        }
+        setCounter(cur => cur.slice(0, -1))
+    }
+
+    function setOperator(operation: Operation) {
+        operationRef.current = operation
+        console.log({ operation });
+        setPreviousCounter(parseFloat(counter).toString())
+        setCounter('0')
+    }
+
+    function toggleValue() {
+        let reference: number = parseFloat(counter)
+        reference = reference * -1
+        setCounter(reference.toString())
+    }
+
 
     return {
         // * Props
@@ -36,7 +57,10 @@ export const useCalculator = () => {
         previousCounter,
         // * Methods
         buildNumber,
+        setOperator,
         clear,
+        toggleValue,
+        removeChar,
 
     }
 }
