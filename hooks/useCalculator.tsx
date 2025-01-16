@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export enum Operation {
     addition = '+',
@@ -8,6 +8,7 @@ export enum Operation {
 }
 
 export const useCalculator = () => {
+    const [formula, setFormula] = useState('')
     const [counter, setCounter] = useState('0')
     const [previousCounter, setPreviousCounter] = useState('0')
     const operationRef = useRef<Operation>()
@@ -32,6 +33,13 @@ export const useCalculator = () => {
     function removeChar() {
         const num = Math.abs(parseFloat(counter))
         if (num < 10) {
+            // * Todo decimal menor a [-10 , 10]  era retornado automaticamente al 0
+            // * por eso si existe una parte decimal en el numero, realizar la valicacion
+            const [numberPart, decimalPart] = counter.split('.')
+            if (decimalPart) {
+                const newValue = numberPart + '.' + decimalPart.slice(0, -1)
+                return setCounter(parseFloat(newValue).toString())
+            }
             return setCounter('0')
         }
         setCounter(cur => cur.slice(0, -1))
@@ -39,7 +47,6 @@ export const useCalculator = () => {
 
     function setOperator(operation: Operation) {
         operationRef.current = operation
-        console.log({ operation });
         setPreviousCounter(parseFloat(counter).toString())
         setCounter('0')
     }
