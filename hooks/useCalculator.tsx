@@ -13,6 +13,15 @@ export const useCalculator = () => {
     const [previousCounter, setPreviousCounter] = useState('0')
     const operationRef = useRef<Operation>()
 
+    useEffect(() => {
+        if (operationRef.current) {
+            setFormula(`${previousCounter} ${operationRef.current} ${counter}`)
+        } else {
+            setFormula(counter)
+        }
+    }, [counter])
+
+
 
     function buildNumber(text: string) {
         // * No agregar más puntos ni 0s innecesarios
@@ -26,8 +35,10 @@ export const useCalculator = () => {
     }
 
     function clear() {
+        operationRef.current = undefined
         setCounter('0')
         setPreviousCounter('0')
+
     }
 
     function removeChar() {
@@ -57,10 +68,35 @@ export const useCalculator = () => {
         setCounter(reference.toString())
     }
 
+    function equalOperator() {
+        const result = _calculateValue()
+        operationRef.current = undefined
+        setCounter(result.toString())
+        setPreviousCounter('0')
+    }
+
+    function _calculateValue(): number {
+        const num1: number = parseFloat(counter)
+        const num2: number = parseFloat(previousCounter)
+        switch (operationRef.current) {
+            case Operation.addition:
+                return num2 + num1
+            case Operation.substraction:
+                return num2 - num1
+            case Operation.multiplication:
+                return num2 * num1
+            case Operation.divition:
+                if (num1 === 0) return 0;
+                return num2 / num1
+            default:
+                return 0
+        }
+    }
+
 
     return {
         // * Props
-        counter,
+        formula,
         previousCounter,
         // * Methods
         buildNumber,
@@ -68,6 +104,6 @@ export const useCalculator = () => {
         clear,
         toggleValue,
         removeChar,
-
+        equalOperator,
     }
 }

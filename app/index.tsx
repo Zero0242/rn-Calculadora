@@ -6,14 +6,14 @@ import { CalculatorButton } from '@/components/CalculatorButton';
 import { Operation, useCalculator } from '@/hooks';
 
 export default function CalculadoraApp() {
-    const { counter, previousCounter, buildNumber, clear, setOperator, toggleValue, removeChar } = useCalculator()
+    const { formula, previousCounter, buildNumber, clear, setOperator, toggleValue, removeChar, equalOperator } = useCalculator()
 
     return (
         <View style={globalStyles.calculatorContainer}>
             {/* Resultados */}
             <View style={{ paddingHorizontal: 30, marginBottom: 20 }}>
                 <ThemedText variant='h1'>
-                    {counter}
+                    {formula}
                 </ThemedText>
                 <ThemedText variant='h2'>
                     {previousCounter}
@@ -47,7 +47,7 @@ export default function CalculadoraApp() {
             <View style={globalStyles.row}>
                 <CalculatorButton label='0' onPress={() => buildNumber('0')} buttonType='big-number' />
                 <CalculatorButton label='.' onPress={() => buildNumber('.')} />
-                <CalculatorButton label='=' buttonType='action' />
+                <CalculatorButton label='=' onPress={() => equalOperator()} buttonType='action' />
             </View>
         </View>
     )
